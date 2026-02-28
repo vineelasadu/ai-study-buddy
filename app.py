@@ -10,22 +10,16 @@ st.write("Enter your study notes or topic below:")
 
 text = st.text_area("Your Text Here", height=220)
 
-import os
+# ---------------- Load Model (ONCE) ----------------
 import streamlit as st
 from transformers import pipeline
 
 @st.cache_resource
 def load_model():
-    token = os.getenv("HUGGINGFACEHUB_API_TOKEN") or st.secrets.get("HUGGINGFACEHUB_API_TOKEN")
-
-    if not token:
-        st.error("Hugging Face token missing")
-        st.stop()
-
     return pipeline(
         task="text2text-generation",
         model="google/flan-t5-base",
-        token=token
+        device=-1
     )
 model = load_model()
 # ---------------- Generation Settings ----------------
