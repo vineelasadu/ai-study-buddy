@@ -11,16 +11,14 @@ st.write("Enter your study notes or topic below:")
 text = st.text_area("Your Text Here", height=220)
 
 # ---------------- Load Model (ONCE) ----------------
-import streamlit as st
-from transformers import pipeline
-
 @st.cache_resource
 def load_model():
     return pipeline(
-        task="text2text-generation",
+        "text2text-generation",   
         model="google/flan-t5-base",
         device=-1
     )
+
 model = load_model()
 # ---------------- Generation Settings ----------------
 GEN_KWARGS = {
