@@ -24,7 +24,7 @@ text = st.text_area(
 def load_model():
     device = 0 if torch.cuda.is_available() else -1
     return pipeline(
-        "text2text",                 # ✅ FIXED for Streamlit Cloud
+        "text2text-generation",                 # ✅ FIXED for Streamlit Cloud
         model="google/flan-t5-base",
         device=device
     )
